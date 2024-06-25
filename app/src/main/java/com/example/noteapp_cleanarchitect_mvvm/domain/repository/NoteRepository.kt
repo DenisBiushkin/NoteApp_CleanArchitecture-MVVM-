@@ -6,7 +6,7 @@ import java.time.Instant
 
 interface NoteRepository {
 
-    suspend fun getNotesByDate(date: Instant): List<Note>
+    suspend fun getNotesByDate(date: Instant):Flow< List<Note>>
     suspend fun insertNote(note: Note)
     suspend fun deleteNote(note: Note)
 }
