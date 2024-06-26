@@ -8,12 +8,18 @@ import androidx.room.Query
 import com.example.noteapp_cleanarchitect_mvvm.domain.model.Note
 import kotlinx.coroutines.flow.Flow
 import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Dao
 interface NoteDao {
 
-    @Query("SELECT * FROM note ")
-    suspend fun getNotesByDate():List<Note>
+    @Query("""
+        SELECT * FROM note 
+            WHERE (date_start BETWEEN :date AND :date+86400)
+            AND (date_finish BETWEEN :date AND :date+86400)
+    """)//мб доработать потом для поиска по временному промежутку
+    suspend fun getNotesByDate(date: LocalDateTime):List<Note>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(note:Note)

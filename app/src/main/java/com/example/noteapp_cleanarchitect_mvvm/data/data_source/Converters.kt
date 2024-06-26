@@ -16,7 +16,6 @@ class Converters {
                 .toLocalDateTime()
         }
     }
-
     @TypeConverter
     fun toTimestamp(date: LocalDateTime?): Long? {
         return date?.toEpochSecond(ZoneOffset.UTC)

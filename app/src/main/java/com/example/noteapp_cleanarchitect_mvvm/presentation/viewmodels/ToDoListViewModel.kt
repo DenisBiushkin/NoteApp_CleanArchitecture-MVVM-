@@ -17,24 +17,64 @@ class ToDoListViewModel @Inject constructor(
     private val repository: NoteRepository
 ):ViewModel() {
 
-
+    val listNotes = listOf(
+       Note(
+            name = "Awake",
+            description = "Почистить зубы",
+            date_start= LocalDateTime.of(2024, 6, 26,7,0),
+            date_finish = LocalDateTime.of(2024, 6, 26,8,0)
+        ),
+        Note(
+            name = "Working",
+            description = "Сделать задание по практике",
+            date_start= LocalDateTime.of(2024, 6, 26,9,0),
+            date_finish = LocalDateTime.of(2024, 6, 26,10,0)
+        ),
+        Note(
+            name = "Eating",
+            description = "Покушать",
+            date_start= LocalDateTime.of(2024, 6, 26,10,0),
+            date_finish = LocalDateTime.of(2024, 6, 26,14,0)
+        ),
+        /////
+        Note(
+            name = "Sleep",
+            description = "Поспать",
+            date_start= LocalDateTime.of(2024, 6, 27,0,0),
+            date_finish = LocalDateTime.of(2024, 6, 27,10,0)
+        ),
+        Note(
+            name = "Chill",
+            description = "Отдохнуть",
+            date_start= LocalDateTime.of(2024, 6, 27,10,0),
+            date_finish = LocalDateTime.of(2024, 6, 27,11,0)
+        ),
+        Note(
+            name = "Hard working",
+            description = "Лютый воркинг над заданием по практике",
+            date_start= LocalDateTime.of(2024, 6, 27,11,0),
+            date_finish = LocalDateTime.of(2024, 6, 27,18,0)
+        ),
+    )
+    suspend fun initdatabase1(){
+        repository.insertNote(listNotes[3])
+        repository.insertNote(listNotes[4])
+        repository.insertNote(listNotes[5])
+    }
     init {
-        val date= LocalDateTime
-            .of(1974, 9, 5,11,0)
+        val date_search = LocalDateTime
+            .of(1974, 9, 5,0,0)
+
         viewModelScope.launch {
 
-            repository.insertNote(Note(
-                name = "By telephone",
-                description = "Buy samsumg s23",
-//                birthday = Date(1974),
-                 date_start =date,
-                 date_finish = date
-            ))
-//             repository.getNotesByDate(date).collect{
-//             it.forEach{
-//             Log.d("MyTag", "ID:${it.id} Description:${it.description}")
-//             }
-//             }
+
+            repository.getNotesByDate(date_search).collect{
+                it.forEach{
+
+                //Log.d("MyTag", "ID:${it.id} Description:${it.description} Date:${it.date_start}")
+                    Log.d("MyTag", "Start:${it.date_start} Finish:${it.date_finish}")
+                }
+             }
         }
     }
 }
