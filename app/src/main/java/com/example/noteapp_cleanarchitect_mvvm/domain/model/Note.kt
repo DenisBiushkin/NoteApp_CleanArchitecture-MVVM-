@@ -7,6 +7,7 @@ import com.example.noteapp_cleanarchitect_mvvm.ui.theme.LightGreen
 import com.example.noteapp_cleanarchitect_mvvm.ui.theme.RedOrange
 import com.example.noteapp_cleanarchitect_mvvm.ui.theme.RedPink
 import com.example.noteapp_cleanarchitect_mvvm.ui.theme.Violet
+import java.time.LocalDateTime
 
 @Entity
 data class Note(
@@ -15,6 +16,8 @@ data class Note(
     val id :Int? =null,
     val name:String,
     val description:String,
+    val date_start: LocalDateTime?,
+    val date_finish:LocalDateTime?,
 ){
     companion object{
         val  noteColors= listOf(
