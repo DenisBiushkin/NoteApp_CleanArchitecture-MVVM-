@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 interface NoteRepository {
 
-    suspend fun getNotesByDate(dateTime: LocalDateTime):Flow< List<Note>>
+    fun getNotesByDate(dateTime: LocalDateTime):Flow< List<Note>>
     suspend fun insertNote(note: Note)
     suspend fun deleteNote(note: Note)
 }

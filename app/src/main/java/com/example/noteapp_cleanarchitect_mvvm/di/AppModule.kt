@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.example.noteapp_cleanarchitect_mvvm.data.data_source.NoteDatabase
 import com.example.noteapp_cleanarchitect_mvvm.data.repository.NoteRepositoryImpl
 import com.example.noteapp_cleanarchitect_mvvm.domain.repository.NoteRepository
+import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.AddNoteUseCase
+import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.GetNotesByDateUseCase
 import com.example.noteapp_cleanarchitect_mvvm.util.Constans
 import dagger.Module
 import dagger.Provides
@@ -30,6 +32,17 @@ object AppModule   {
     @Singleton
     fun provideNoteRepository(db:NoteDatabase): NoteRepository {
         return NoteRepositoryImpl(db.noteDao)
+    }
+
+    @Provides
+    @Singleton
+    fun proviseAddNoteUseCase(repository: NoteRepository):AddNoteUseCase{
+        return AddNoteUseCase(repository=repository)
+    }
+    @Provides
+    @Singleton
+    fun proviseGetNotesByDateUseCase(repository: NoteRepository):GetNotesByDateUseCase{
+        return GetNotesByDateUseCase(repository=repository)
     }
 
 }

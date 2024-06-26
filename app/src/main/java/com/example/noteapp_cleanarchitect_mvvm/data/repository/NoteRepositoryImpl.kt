@@ -12,24 +12,19 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 
 class NoteRepositoryImpl(
-    private val dao: NoteDao
+    private val database:NoteDao
 ): NoteRepository {
 
-
-
-    override suspend fun getNotesByDate(datetime:LocalDateTime):Flow <List<Note>> {
+    override fun getNotesByDate(datetime:LocalDateTime):Flow <List<Note>> {
        // val date=datetime.toEpochSecond(ZoneOffset.UTC)
-
-        return flow {
-            emit(dao.getNotesByDate(datetime))
-        }
+        return database.getNotesByDate(datetime)
     }
 
     override suspend fun insertNote(note: Note) {
-        dao.insertNote(note = note)
+        database.insertNote(note = note)
     }
 
     override suspend fun deleteNote(note: Note) {
-        dao.deleteNote(note=note)
+        database.deleteNote(note=note)
     }
 }

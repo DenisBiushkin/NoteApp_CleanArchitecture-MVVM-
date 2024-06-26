@@ -19,7 +19,7 @@ interface NoteDao {
             WHERE (date_start BETWEEN :date AND :date+86400)
             AND (date_finish BETWEEN :date AND :date+86400)
     """)//мб доработать потом для поиска по временному промежутку
-    suspend fun getNotesByDate(date: LocalDateTime):List<Note>
+    fun getNotesByDate(date: LocalDateTime):Flow<List<Note>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(note:Note)

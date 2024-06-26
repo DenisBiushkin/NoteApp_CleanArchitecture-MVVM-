@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.noteapp_cleanarchitect_mvvm.domain.model.Note
 import com.example.noteapp_cleanarchitect_mvvm.domain.repository.NoteRepository
+import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.AddNoteUseCase
+import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.GetNotesByDateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -14,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ToDoListViewModel @Inject constructor(
-    private val repository: NoteRepository
+    private val getNotesByDateUseCase: GetNotesByDateUseCase,
+    private val addNoteUseCase: AddNoteUseCase
 ):ViewModel() {
 
     val listNotes = listOf(
@@ -57,9 +60,9 @@ class ToDoListViewModel @Inject constructor(
         ),
     )
     suspend fun initdatabase1(){
-        repository.insertNote(listNotes[3])
-        repository.insertNote(listNotes[4])
-        repository.insertNote(listNotes[5])
+//        repository.insertNote(listNotes[3])
+//        repository.insertNote(listNotes[4])
+//        repository.insertNote(listNotes[5])
     }
     init {
         val date_search = LocalDateTime
@@ -67,10 +70,8 @@ class ToDoListViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-
-            repository.getNotesByDate(date_search).collect{
+            getNotesByDateUseCase.execute(date_search).collect{
                 it.forEach{
-
                 //Log.d("MyTag", "ID:${it.id} Description:${it.description} Date:${it.date_start}")
                     Log.d("MyTag", "Start:${it.date_start} Finish:${it.date_finish}")
                 }
