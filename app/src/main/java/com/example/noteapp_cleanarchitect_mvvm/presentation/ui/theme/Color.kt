@@ -1,4 +1,4 @@
-package com.example.noteapp_cleanarchitect_mvvm.ui.theme
+package com.example.noteapp_cleanarchitect_mvvm.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
