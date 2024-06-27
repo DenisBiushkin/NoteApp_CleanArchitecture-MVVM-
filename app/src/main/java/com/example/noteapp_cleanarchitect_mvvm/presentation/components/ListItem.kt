@@ -1,6 +1,7 @@
 package com.example.noteapp_cleanarchitect_mvvm.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,7 +44,9 @@ import java.time.LocalDateTime
 
 @Composable
 fun ListItem(
-    note: NoteUI
+    note: NoteUI,
+    onClickItem: () -> Unit,
+    onClickDelit: () -> Unit
 ){
 
     val gradient =Brush.horizontalGradient(
@@ -54,7 +57,7 @@ fun ListItem(
     )
     Card(
         modifier = Modifier
-            .padding(vertical = 4.dp, horizontal = 10.dp)
+            .padding(vertical = 4.dp, horizontal = 6.dp)
             .fillMaxWidth()
             .height(70.dp)
     ){
@@ -62,6 +65,9 @@ fun ListItem(
             modifier = Modifier
                 .fillMaxSize()
                 .background(brush = gradient)
+                .clickable {
+                    onClickItem()
+                }
         ){
             Row(
                 modifier = Modifier.fillMaxSize()
@@ -76,6 +82,9 @@ fun ListItem(
                     ,contentAlignment = Alignment.Center
                 ){
                     Icon(
+                        modifier = Modifier.clickable {
+                              onClickDelit()
+                        },
                         painter = painterResource(
                             id = R.drawable.baseline_delete),
                         contentDescription = "")
@@ -156,5 +165,12 @@ fun showListItem(){
     description = "Сделать задание по практике, сделать много многа ",
     date_start= LocalDateTime.of(2024, 6, 26,9,0),
     date_finish = LocalDateTime.of(2024, 6, 26,10,0)
-    ).toNoteUI())
+    ).toNoteUI(),
+        onClickDelit = {
+
+        },
+        onClickItem = {
+
+        }
+    )
 }
