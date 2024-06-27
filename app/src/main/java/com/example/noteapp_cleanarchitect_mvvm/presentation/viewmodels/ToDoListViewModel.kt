@@ -2,7 +2,10 @@ package com.example.noteapp_cleanarchitect_mvvm.presentation.viewmodels
 
 import android.util.Log
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.AddNoteUseCase
@@ -21,10 +24,9 @@ class ToDoListViewModel @Inject constructor(
     private val addNoteUseCase: AddNoteUseCase
 ):ViewModel() {
 
-    private var _state= mutableStateOf(NoteState())
-    val state: State<NoteState> = _state
-    val ded= mutableStateOf(0)
+    private var _state= MutableStateFlow(NoteState())
 
+    val state= _state.asStateFlow()
 
     fun GetNotesByDate(date_search: LocalDateTime){
 
@@ -34,20 +36,14 @@ class ToDoListViewModel @Inject constructor(
                 val NotesUI=notes.map {
                     it.toNoteUI()
                 }
-                state.value.notes=NotesUI
-                _state.value=state.value
-
-//                it.forEach{
-//                    //Log.d("MyTag", "ID:${it.id} Description:${it.description} Date:${it.date_start}")
-//                    Log.d("MyTag", "Start:${it.date_start} Finish:${it.date_finish}")
-//                }
+                _state.value=NoteState(notes=NotesUI)
             }
         }
     }
     init {
         val date_search = LocalDateTime
-            .of(1974, 9, 5,0,0)
-
+            .of(2024, 6, 26,0,0)
+        GetNotesByDate(date_search)
 
     }
 }

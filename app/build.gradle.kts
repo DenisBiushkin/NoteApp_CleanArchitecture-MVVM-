@@ -32,6 +32,7 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -75,6 +76,13 @@ dependencies {
     implementation ("androidx.navigation:navigation-compose:2.5.3")
     implementation ("androidx.compose.material:material:1.6.6")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0")
+
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.8")
+
+    implementation ("io.github.vanpra.compose-material-dialogs:core:0.8.1-rc")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")//если sdk<26(можно пильнуть потом)
+
 
     //coroutine
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")

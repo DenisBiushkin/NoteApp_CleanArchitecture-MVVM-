@@ -43,7 +43,7 @@ import java.time.LocalDateTime
 
 @Composable
 fun ListItem(
-    note: Note
+    note: NoteUI
 ){
 
     val gradient =Brush.horizontalGradient(
@@ -88,7 +88,7 @@ fun ListItem(
 }
 @Composable
 fun TextItem(
-    note: Note
+    note: NoteUI
 ){
     Column(
         modifier = Modifier
@@ -126,7 +126,7 @@ fun TextItem(
 }
 @Composable
 fun PeriodTime(
-    note: Note
+    note: NoteUI
 ){
     Column (
         modifier = Modifier
@@ -143,8 +143,8 @@ fun PeriodTime(
             //fontFamily = Constans.fontFamily,
             fontWeight = FontWeight.Bold
         )
-        Text(text = "07:00", style = style)
-        Text(text = "12:00",style=style)
+        Text(text = note.time_start, style = style)
+        Text(text = note.time_finish,style=style)
     }
 
 }
@@ -156,5 +156,5 @@ fun showListItem(){
     description = "Сделать задание по практике, сделать много многа ",
     date_start= LocalDateTime.of(2024, 6, 26,9,0),
     date_finish = LocalDateTime.of(2024, 6, 26,10,0)
-    ))
+    ).toNoteUI())
 }
