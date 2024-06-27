@@ -4,13 +4,16 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -46,6 +49,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.noteapp_cleanarchitect_mvvm.domain.model.Note
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.CurrentDay
+import com.example.noteapp_cleanarchitect_mvvm.presentation.util.CustomButton
 import com.example.noteapp_cleanarchitect_mvvm.presentation.viewmodels.ToDoListViewModel
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.iconTitle
@@ -71,19 +75,50 @@ fun MainScreen(
         mutableStateOf(LocalDate.now())
     }
     Column (
-        modifier=Modifier
+        modifier= Modifier
             .fillMaxSize()
     ){
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.91f)
-                //.background(Color.Red)
+            //.background(Color.Red)
         ) {
 
-            Button(
-                onClick = { dateDialogController=true }
-            ) {
+
+            Box(
+                modifier = Modifier
+                    .padding(5.dp)
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.08f)
+                    .background(
+                        color = Color(0xFFea8df7),
+                        shape = RoundedCornerShape(7.dp)
+                    )
+            ){
+                Row (
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .fillMaxSize()
+                    ,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ){
+                    CustomButton(
+                        modifier = Modifier
+                            .width(100.dp)
+                            .height(40.dp)
+                            .background(
+                                color = Color(0xFF800080),
+                                shape = RoundedCornerShape(12.dp)
+                            )
+                        , text = "Дата",
+                        onClick = {
+                            dateDialogController=true
+                        }
+                    )
+                }
+
             }
 
             if(dateDialogController){
@@ -104,6 +139,7 @@ fun MainScreen(
                     Log.d("MyTag","Запись удалена")
                 },
                 currentDate =state.value.currentDay_format,
+
             )
         }
         Box (
