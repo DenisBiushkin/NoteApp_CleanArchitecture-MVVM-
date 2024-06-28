@@ -7,6 +7,7 @@ import com.example.noteapp_cleanarchitect_mvvm.R
 
 object Constans {
     const val DATABASE_NAME="notes_db"
+    const val DETAIL_ARGUMENT_NOTE_ID="noteId"
     val fontFamily= FontFamily(
         Font(R.font.lexend_thin, FontWeight.Thin) ,
         Font(R.font.lexend_medium, FontWeight.Medium),
