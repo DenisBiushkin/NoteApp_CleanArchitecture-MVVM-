@@ -8,6 +8,8 @@ import java.time.LocalDateTime
 interface NoteRepository {
 
     fun getNotesByDate(dateTime: LocalDateTime):Flow< List<Note>>
+
+    suspend fun getNoteById(noteId:Int):Note?
     suspend fun insertNote(note: Note)
     suspend fun deleteNote(note: Note)
 }

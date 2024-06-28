@@ -38,6 +38,7 @@ import com.example.noteapp_cleanarchitect_mvvm.presentation.components.BoxItems
 import com.example.noteapp_cleanarchitect_mvvm.presentation.components.TestDatePicker
 import com.example.noteapp_cleanarchitect_mvvm.presentation.ui.theme.baseUiColor
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.CustomButton
+import com.example.noteapp_cleanarchitect_mvvm.presentation.viewmodels.DetailScreenViewModel
 import com.example.noteapp_cleanarchitect_mvvm.presentation.viewmodels.ToDoListViewModel
 import java.time.LocalDate
 
@@ -48,6 +49,7 @@ fun MainScreen(
     viewmodel:ToDoListViewModel= hiltViewModel(),
     navController: NavHostController
 ){
+
     val state = viewmodel.state.collectAsState()
 
     var dateDialogController by  remember { mutableStateOf(false) }
@@ -114,7 +116,9 @@ fun MainScreen(
                 listNotes = viewmodel.state.value.notes,
                 onClickDetailItem = {
                    // Log.d("MyTag","Подробная информация о записи")
-                    navController.navigate(route = Screens.Detail.noteId(12))
+                    val currentId=it.id ?: 0
+
+                    navController.navigate(route = Screens.Detail.toJsonFromNote(it))
                 },
                 onClickDeleteItem= {
                     //Log.d("MyTag","Запись удалена")

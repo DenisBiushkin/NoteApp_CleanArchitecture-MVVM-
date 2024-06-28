@@ -14,6 +14,9 @@ import java.time.ZoneOffset
 class NoteRepositoryImpl(
     private val database:NoteDao
 ): NoteRepository {
+    override suspend fun getNoteById(noteId: Int): Note? {
+        return database.getNoteById(noteId)
+    }
 
     override fun getNotesByDate(datetime:LocalDateTime):Flow <List<Note>> {
        // val date=datetime.toEpochSecond(ZoneOffset.UTC)

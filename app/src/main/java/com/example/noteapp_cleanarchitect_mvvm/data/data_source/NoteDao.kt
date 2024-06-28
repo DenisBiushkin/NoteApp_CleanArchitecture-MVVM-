@@ -21,6 +21,9 @@ interface NoteDao {
     """)//мб доработать потом для поиска по временному промежутку
     fun getNotesByDate(date: LocalDateTime):Flow<List<Note>>
 
+    @Query("  SELECT * FROM note WHERE id=:noteId")
+    suspend fun getNoteById(noteId:Int):Note?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(note:Note)
 

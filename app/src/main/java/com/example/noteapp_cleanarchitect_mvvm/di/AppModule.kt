@@ -6,6 +6,7 @@ import com.example.noteapp_cleanarchitect_mvvm.data.data_source.NoteDatabase
 import com.example.noteapp_cleanarchitect_mvvm.data.repository.NoteRepositoryImpl
 import com.example.noteapp_cleanarchitect_mvvm.domain.repository.NoteRepository
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.AddNoteUseCase
+import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.GetNoteByIdUseCase
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.GetNotesByDateUseCase
 import com.example.noteapp_cleanarchitect_mvvm.util.Constans
 import dagger.Module
@@ -43,6 +44,12 @@ object AppModule   {
     @Singleton
     fun proviseGetNotesByDateUseCase(repository: NoteRepository):GetNotesByDateUseCase{
         return GetNotesByDateUseCase(repository=repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetNoteByIdUseCase(repository: NoteRepository): GetNoteByIdUseCase{
+        return  GetNoteByIdUseCase(repository=repository)
     }
 
 }

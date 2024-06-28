@@ -16,6 +16,13 @@ object Constans {
         date_start= LocalDateTime.of(2024, 6, 26,9,0),
         date_finish = LocalDateTime.of(2024, 6, 26,10,0)
     ).toNoteUI()
+    val noteError =Note(
+        id=-1,
+        date_start = LocalDateTime.now(),
+        date_finish =LocalDateTime.now(),
+        name = "Error",
+        description = "Error",
+    )
     val fontFamily= FontFamily(
         Font(R.font.lexend_thin, FontWeight.Thin) ,
         Font(R.font.lexend_medium, FontWeight.Medium),

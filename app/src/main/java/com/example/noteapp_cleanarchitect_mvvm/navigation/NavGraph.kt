@@ -36,15 +36,14 @@ fun NavGraph(
                 navArgument(
                     name=Constans.DETAIL_ARGUMENT_NOTE_ID
                 ) {
-                    type = NavType.IntType
-                    defaultValue=1
+                    type = NavType.StringType
                 }
             )
         ){
-
+           val valueNote=it!!.arguments!!.getString(Constans.DETAIL_ARGUMENT_NOTE_ID)
            DetailScreen(
                navController = navController,
-               noteId= it.arguments!!.getInt(Constans.DETAIL_ARGUMENT_NOTE_ID)
+               note= Screens.Detail.toNoteFromJson(valueNote)
            )
         }
         
