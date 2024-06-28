@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import com.example.noteapp_cleanarchitect_mvvm.domain.model.Note
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.CurrentDay
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.NoteUI
+import com.example.noteapp_cleanarchitect_mvvm.presentation.ui.theme.baseUiColor
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -57,12 +58,12 @@ fun BoxItems(
         .background(
             shape = shapebox,
             brush = Brush.verticalGradient(
-                colors = listOf(Color(0xFFea8df7), Color.Transparent)
+                colors = listOf(baseUiColor, Color.Transparent)
             )
         )
         .border(
             width = 1.dp,
-            color = Color(0xFFea8df7),
+            color =baseUiColor,
             shape = shapebox
         )
     ){

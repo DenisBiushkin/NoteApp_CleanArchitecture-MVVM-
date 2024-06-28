@@ -36,6 +36,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.noteapp_cleanarchitect_mvvm.navigation.Screens
 import com.example.noteapp_cleanarchitect_mvvm.presentation.components.BoxItems
 import com.example.noteapp_cleanarchitect_mvvm.presentation.components.TestDatePicker
+import com.example.noteapp_cleanarchitect_mvvm.presentation.ui.theme.baseUiColor
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.CustomButton
 import com.example.noteapp_cleanarchitect_mvvm.presentation.viewmodels.ToDoListViewModel
 import java.time.LocalDate
@@ -71,7 +72,7 @@ fun MainScreen(
                     .fillMaxWidth()
                     .fillMaxHeight(0.08f)
                     .background(
-                        color = Color(0xFFea8df7),
+                        color = baseUiColor,
                         shape = RoundedCornerShape(7.dp)
                     )
             ){

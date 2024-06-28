@@ -1,4 +1,4 @@
-package com.example.noteapp_cleanarchitect_mvvm.presentation.viewmodels
+package com.example.noteapp_cleanarchitect_mvvm.presentation.util
 
 import com.example.noteapp_cleanarchitect_mvvm.domain.model.Note
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.CurrentDay

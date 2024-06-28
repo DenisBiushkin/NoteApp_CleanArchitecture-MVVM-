@@ -17,3 +17,7 @@ val RedPink = Color(0xfff48fb1)
 val BabyBlue = Color(0xff81deea)
 val Violet = Color(0xffcf94da)
 val LightGreen = Color(0xffe7ed9b)
+
+val baseUiColor=Color(0xFFea8df7)
+    //val  baseUiColor=Color(0xFFf7e0b5)//f7e0b5
+val detailUiColor=Color(0xFFf5f5dc)
