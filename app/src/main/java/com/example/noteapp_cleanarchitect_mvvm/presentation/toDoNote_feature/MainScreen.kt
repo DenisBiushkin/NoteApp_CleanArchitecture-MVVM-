@@ -1,6 +1,5 @@
-package com.example.noteapp_cleanarchitect_mvvm.presentation.screens
+package com.example.noteapp_cleanarchitect_mvvm.presentation.toDoNote_feature
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,19 +33,17 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.noteapp_cleanarchitect_mvvm.navigation.Screens
-import com.example.noteapp_cleanarchitect_mvvm.presentation.components.BoxItems
-import com.example.noteapp_cleanarchitect_mvvm.presentation.components.TestDatePicker
+import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.BoxItems
+import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.TestDatePicker
 import com.example.noteapp_cleanarchitect_mvvm.presentation.ui.theme.baseUiColor
-import com.example.noteapp_cleanarchitect_mvvm.presentation.util.CustomButton
-import com.example.noteapp_cleanarchitect_mvvm.presentation.viewmodels.DetailScreenViewModel
-import com.example.noteapp_cleanarchitect_mvvm.presentation.viewmodels.ToDoListViewModel
+import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.CustomButton
 import java.time.LocalDate
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
-    viewmodel:ToDoListViewModel= hiltViewModel(),
+    viewmodel: ToDoListViewModel = hiltViewModel(),
     navController: NavHostController
 ){
 

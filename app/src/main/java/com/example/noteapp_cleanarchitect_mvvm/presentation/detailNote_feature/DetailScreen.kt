@@ -1,4 +1,4 @@
-package com.example.noteapp_cleanarchitect_mvvm.presentation.screens
+package com.example.noteapp_cleanarchitect_mvvm.presentation.detailNote_feature
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,7 +23,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -35,13 +33,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.noteapp_cleanarchitect_mvvm.R
-import com.example.noteapp_cleanarchitect_mvvm.domain.model.Note
 import com.example.noteapp_cleanarchitect_mvvm.navigation.Screens
+import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.BlockInfoSpan
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.NoteUI
 import com.example.noteapp_cleanarchitect_mvvm.presentation.ui.theme.detailUiColor
-import com.example.noteapp_cleanarchitect_mvvm.presentation.viewmodels.DetailScreenViewModel
 import com.example.noteapp_cleanarchitect_mvvm.util.Constans
 
 @Composable
@@ -111,7 +107,7 @@ fun DetailScreen(
                Spacer(modifier = Modifier.height(20.dp))
                BlockInfoSpan(
                    title="Дата выполнения задачи",
-                   time="${noteUi.currentDay().date_format}  ${noteUi.currentDay().date_format}",
+                   time="${noteUi.date}  ${noteUi.currentDate_week}",
                    icon= painterResource(
                        id = R.drawable.baseline_calendar_today_24
                    )
@@ -137,59 +133,6 @@ fun DetailScreen(
 
 }
 
-@Composable
-fun BlockInfoSpan(
-    title:String,
-    time:String,
-    icon:Painter,
-    showSecondPart:Boolean=true
-){
-    Row (
-        modifier = Modifier
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.Top
-    ){
-        Icon(
-            modifier = Modifier
-                .padding(top=5.dp)
-            , painter = icon,
-            contentDescription = "",
-            tint = Color(0xFFffba42),
-            //tint=baseUiColor
-        )
-        Spacer(modifier = Modifier.width(10.dp))
-        Column(
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(text = buildAnnotatedString {
-                withStyle(
-                    style= SpanStyle(
-                        fontFamily = Constans.fontFamily,
-                        fontSize = 22.sp
-                    )
-                ){
-                    append(title)
-                }
-            }
-            )
-            if(showSecondPart){
-                Spacer(modifier = Modifier.height(5.dp))
-                Text(text = buildAnnotatedString {
-                    withStyle(
-                        style= SpanStyle(
-                            fontFamily = Constans.fontFamily,
-                            fontSize = 19.sp,
-                            color=Color(0xFFb0a9ab)
-                        )
-                    ){
-                        append(time)
-                    }
-                }
-                )
-            }
-        }
-    }
-}
 @Preview(showBackground = true)
 @Composable
 fun showMainScreenFull_TEST(){

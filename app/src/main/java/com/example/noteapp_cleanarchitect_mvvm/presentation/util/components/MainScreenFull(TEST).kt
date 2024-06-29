@@ -1,4 +1,4 @@
-package com.example.noteapp_cleanarchitect_mvvm.presentation.components
+package com.example.noteapp_cleanarchitect_mvvm.presentation.util.components
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -15,10 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,17 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.noteapp_cleanarchitect_mvvm.domain.model.Note
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.CurrentDay
-import com.example.noteapp_cleanarchitect_mvvm.presentation.util.CustomButton
-import java.time.LocalDateTime
+import com.example.noteapp_cleanarchitect_mvvm.util.Constans
 
-val note = Note(
-    name = "Working",
-    description = "Сделать задание по практике, сделать много многа ",
-    date_start= LocalDateTime.of(2024, 6, 26,9,0),
-    date_finish = LocalDateTime.of(2024, 6, 26,10,0)
-).toNoteUI()
+val note =Constans.testnote
 @Composable
 fun MainScreenFull_TEST(){
     Column (
@@ -98,8 +89,8 @@ fun MainScreenFull_TEST(){
             BoxItems(
                 //listNotes = viewmodel.state.value.notes,
                 listNotes = listOf(
-                    note,note,note,note,
-                    note,note,note,note,
+                    note, note, note, note,
+                    note, note, note, note,
 
                 ),
                 onClickDetailItem = {

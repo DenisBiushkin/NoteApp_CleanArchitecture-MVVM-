@@ -1,4 +1,4 @@
-package com.example.noteapp_cleanarchitect_mvvm.presentation.viewmodels
+package com.example.noteapp_cleanarchitect_mvvm.presentation.detailNote_feature
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

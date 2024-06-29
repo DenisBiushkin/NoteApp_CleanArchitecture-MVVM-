@@ -1,4 +1,4 @@
-package com.example.noteapp_cleanarchitect_mvvm.presentation.components
+package com.example.noteapp_cleanarchitect_mvvm.presentation.util.components
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -120,31 +120,31 @@ fun BoxItems(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun showBoxItems(){
-
-    val note =Note(
-        name = "Working",
-        description = "Сделать задание по практике, сделать много многа ",
-        date_start= LocalDateTime.of(2024, 6, 26,9,0),
-        date_finish = LocalDateTime.of(2024, 6, 26,10,0)
-    ).toNoteUI()
-    BoxItems(
-
-        listNotes = listOf(
-            note,note,
-            note,note,
-            note,note,
-            note,note,
-
-        ),
-        onClickDeleteItem = {
-
-        },
-        onClickDetailItem = {
-
-        },
-        currentDate =CurrentDay(date_format = "27.0.2024")
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun showBoxItems(){
+//
+//    val note =Note(
+//        name = "Working",
+//        description = "Сделать задание по практике, сделать много многа ",
+//        date_start= LocalDateTime.of(2024, 6, 26,9,0),
+//        date_finish = LocalDateTime.of(2024, 6, 26,10,0)
+//    ).toNoteUI()
+//    BoxItems(
+//
+//        listNotes = listOf(
+//            note,note,
+//            note,note,
+//            note,note,
+//            note,note,
+//
+//        ),
+//        onClickDeleteItem = {
+//
+//        },
+//        onClickDetailItem = {
+//
+//        },
+//        currentDate =CurrentDay(date_format = "27.0.2024")
+//    )
+//}

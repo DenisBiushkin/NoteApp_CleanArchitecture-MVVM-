@@ -1,4 +1,4 @@
-package com.example.noteapp_cleanarchitect_mvvm.presentation.components
+package com.example.noteapp_cleanarchitect_mvvm.presentation.util.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -157,20 +157,20 @@ fun PeriodTime(
     }
 
 }
-@Preview(showBackground = true)
-@Composable
-fun showListItem(){
-    ListItem(note =Note(
-            name = "Working",
-    description = "Сделать задание по практике, сделать много многа ",
-    date_start= LocalDateTime.of(2024, 6, 26,9,0),
-    date_finish = LocalDateTime.of(2024, 6, 26,10,0)
-    ).toNoteUI(),
-        onClickDelit = {
-
-        },
-        onClickItem = {
-
-        }
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun showListItem(){
+//    ListItem(note =Note(
+//            name = "Working",
+//    description = "Сделать задание по практике, сделать много многа ",
+//    date_start= LocalDateTime.of(2024, 6, 26,9,0),
+//    date_finish = LocalDateTime.of(2024, 6, 26,10,0)
+//    ).toNoteUI(),
+//        onClickDelit = {
+//
+//        },
+//        onClickItem = {
+//
+//        }
+//    )
+//}

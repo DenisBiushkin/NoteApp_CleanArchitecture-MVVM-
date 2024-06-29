@@ -6,9 +6,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.noteapp_cleanarchitect_mvvm.presentation.screens.AddScreen
-import com.example.noteapp_cleanarchitect_mvvm.presentation.screens.DetailScreen
-import com.example.noteapp_cleanarchitect_mvvm.presentation.screens.MainScreen
+import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.AddScreen
+import com.example.noteapp_cleanarchitect_mvvm.presentation.detailNote_feature.DetailScreen
+import com.example.noteapp_cleanarchitect_mvvm.presentation.toDoNote_feature.MainScreen
 import com.example.noteapp_cleanarchitect_mvvm.util.Constans
 
 @Composable

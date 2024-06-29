@@ -1,10 +1,12 @@
-package com.example.noteapp_cleanarchitect_mvvm.presentation.viewmodels
+package com.example.noteapp_cleanarchitect_mvvm.presentation.toDoNote_feature
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.AddNoteUseCase
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.GetNotesByDateUseCase
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.CurrentDay
+import com.example.noteapp_cleanarchitect_mvvm.presentation.util.ChoiceType
+import com.example.noteapp_cleanarchitect_mvvm.presentation.util.NoteMainEvent
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.NoteState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,6 +39,30 @@ class ToDoListViewModel @Inject constructor(
         onCerrentDateChanged(date_search.toLocalDate())
     }
 
+    fun onEvent(event: NoteMainEvent){
+        when(event){
+            is NoteMainEvent.AddNewNote ->{
+                //перейти на экран добавления
+            }
+            is NoteMainEvent.DeleteNote ->{
+               //удалить строку дела
+            }
+            is NoteMainEvent.ChoiseDate->{
+                when(event.choiceType){
+                    ChoiceType.Accepted ->{
+                        //закрыть окно даты
+                        //Сделать запрос по дате
+                    }
+                    ChoiceType.Freedom->{
+                        //открыть окно даты
+                    }
+                    ChoiceType.Refused->{
+                        //закрыть окно даты
+                    }
+                }
+            }
+        }
+    }
     private fun GetNotesByDate(date_search: LocalDateTime){
 
         viewModelScope.launch {

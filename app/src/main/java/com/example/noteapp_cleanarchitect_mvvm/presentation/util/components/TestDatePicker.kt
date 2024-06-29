@@ -1,4 +1,4 @@
-package com.example.noteapp_cleanarchitect_mvvm.presentation.components
+package com.example.noteapp_cleanarchitect_mvvm.presentation.util.components
 
 import android.util.Log
 import androidx.compose.foundation.shape.RoundedCornerShape
