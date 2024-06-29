@@ -81,6 +81,7 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-livedata:1.6.8")
 
     implementation ("io.github.vanpra.compose-material-dialogs:core:0.8.1-rc")
+    implementation(platform("androidx.compose:compose-bom:2023.10.01"))
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")//если sdk<26(можно пильнуть потом)
 
 
