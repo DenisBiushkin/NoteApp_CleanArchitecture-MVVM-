@@ -47,18 +47,16 @@ fun TestDatePicker(
     val dateState = rememberDatePickerState(
         initialSelectedDateMillis = currentDate
     )
-    Log.d("MyTag",currentDate.toString())
     DatePickerDialog(
         onDismissRequest = {
-            Log.d("MyTag","onDismissRequest TestPic")
-                           },
+
+        },
         confirmButton = {
             TextButton(onClick = {
                 if(dateState.selectedDateMillis != null){
                     selectedDate = dateState.selectedDateMillis!!
                 }
                 confirmButt(convertLongToDate(selectedDate))
-                Log.d("MyTag",selectedDate.toString())
             }) {
                 Text(text = "Принять")
             }

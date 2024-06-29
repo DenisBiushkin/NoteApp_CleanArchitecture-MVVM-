@@ -1,5 +1,10 @@
 package com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.noteapp_cleanarchitect_mvvm.domain.model.Note
@@ -13,25 +18,49 @@ import javax.inject.Inject
 class AddScreenViewModel @Inject constructor(
     private val addNoteUseCase: AddNoteUseCase
 ):ViewModel() {
+    private val _titleText = mutableStateOf(TextFieldState(
+        hint = "Введите заголовок"
+    ))
+    val titleText: State<TextFieldState> =_titleText
+    private val _descriptinText = mutableStateOf(TextFieldState(
+        hint = "Введите описание"
+    ))
+    val descriptinText: State<TextFieldState> =_descriptinText
+
     init {
-        val listNotes = listOf(
-            Note(
-                name = "TEST/TEST",
-                description = "Улитки — тихие и неприхотливые животные, — говорили друзья, протягивая мне контейнер с животинкой. Каждую ночь теперь просыпаюсь оттого, что моё \"тихое и неприхотливое\" перетаскивает мисочку с водой на другой конец террариума и смачно бросает её в землю. Перестановку устраивает каждую ночь, чтоб её, а мне кроме моей комнаты держать её негде.",
-                date_start= LocalDateTime.of(2024, 6, 29,9,0),
-                date_finish = LocalDateTime.of(2024, 6, 29,10,0),
-                color = 12
-            ),
-            Note(
-                name = "Улитки",
-                description = "Улитки — тихие и неприхотливые животные, — говорили друзья, протягивая мне контейнер с животинкой. Каждую ночь теперь просыпаюсь оттого, что моё \"тихое и неприхотливое\" перетаскивает мисочку с водой на другой конец террариума и смачно бросает её в землю. Перестановку устраивает каждую ночь, чтоб её, а мне кроме моей комнаты держать её негде.",
-                date_start= LocalDateTime.of(2024, 6, 29,11,0),
-                date_finish = LocalDateTime.of(2024, 6, 29,15,0),
-                color = 12
-            ),
-        )
-        listNotes.forEach {
-            addNote(it)
+
+    }
+    fun onEvent(event:AddNoteEvent){
+        when(event){
+            is AddNoteEvent.EnteredTitle ->{
+                _titleText.value=titleText.value.copy(
+                    text =event.title
+                )
+                //
+            }
+            is AddNoteEvent.EnteredDescription->{
+                _descriptinText.value=descriptinText.value.copy(
+                    text = event.description
+                )
+            }
+            is AddNoteEvent.ChangeTitleVisibility ->{
+
+            }
+            is AddNoteEvent.ChangeDescriptionVisibility->{
+
+            }
+            is AddNoteEvent.SaveNote->{
+                val intColor=Color.Cyan.toArgb()
+                val newNote =Note(
+                    name = _titleText.value.text,
+                    description = _descriptinText.value.text,
+                    date_start = LocalDateTime.now(),//изменить на поле в Viemodel
+                    date_finish = LocalDateTime.now(),//изменить на поле в Viemodel
+                    color=intColor
+                )
+                addNote(newNote)
+            }
+
         }
     }
     private fun addNote(note: Note){

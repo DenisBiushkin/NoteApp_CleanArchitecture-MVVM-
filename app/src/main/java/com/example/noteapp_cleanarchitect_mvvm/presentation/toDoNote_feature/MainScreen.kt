@@ -106,19 +106,17 @@ fun MainScreen(
                         viewmodel.onDateSelected(it)
                         dateDialogController=false
                     },
-                    dismissButt = { dateDialogController=false }
+                    dismissButt = {
+                        dateDialogController=false
+                    }
                 )
             }
             BoxItems(
                 listNotes = viewmodel.state.value.notes,
                 onClickDetailItem = {
-                   // Log.d("MyTag","Подробная информация о записи")
-                    val currentId=it.id ?: 0
-
                     navController.navigate(route = Screens.Detail.toJsonFromNote(it))
                 },
                 onClickDeleteItem= {
-                    //Log.d("MyTag","Запись удалена")
                 },
                 currentDate =state.value.currentDay_format,
 
