@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.AddNoteUseCase
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.GetNotesByDateUseCase
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.CurrentDay
+import com.example.noteapp_cleanarchitect_mvvm.presentation.toDoNote_feature.util.NoteMainEvent
+import com.example.noteapp_cleanarchitect_mvvm.presentation.toDoNote_feature.util.NoteState
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.ChoiceTypeDatePicker
-import com.example.noteapp_cleanarchitect_mvvm.presentation.util.NoteMainEvent
-import com.example.noteapp_cleanarchitect_mvvm.presentation.util.NoteState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

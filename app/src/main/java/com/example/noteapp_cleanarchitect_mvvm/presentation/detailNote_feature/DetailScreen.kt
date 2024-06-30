@@ -35,7 +35,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.noteapp_cleanarchitect_mvvm.R
 import com.example.noteapp_cleanarchitect_mvvm.navigation.Screens
-import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.BlockInfoSpan
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.NoteUI
 import com.example.noteapp_cleanarchitect_mvvm.presentation.ui.theme.detailUiColor
 import com.example.noteapp_cleanarchitect_mvvm.util.Constans

@@ -33,10 +33,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.noteapp_cleanarchitect_mvvm.navigation.Screens
-import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.BoxItems
+import com.example.noteapp_cleanarchitect_mvvm.presentation.toDoNote_feature.components.BoxItems
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.TestDatePicker
 import com.example.noteapp_cleanarchitect_mvvm.presentation.ui.theme.baseUiColor
-import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.CustomButton
+import com.example.noteapp_cleanarchitect_mvvm.presentation.toDoNote_feature.components.CustomButton
 import java.time.LocalDate
 
 

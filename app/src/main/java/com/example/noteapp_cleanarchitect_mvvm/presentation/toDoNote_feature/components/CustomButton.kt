@@ -1,4 +1,4 @@
-package com.example.noteapp_cleanarchitect_mvvm.presentation.util.components
+package com.example.noteapp_cleanarchitect_mvvm.presentation.toDoNote_feature.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
