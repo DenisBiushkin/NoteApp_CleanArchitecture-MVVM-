@@ -19,12 +19,12 @@ class ValidateNewNoteUseCase(
             timeStart.isBlank() || timeFinish.isBlank() ||
             title.isBlank() || description.isBlank()
         ){
-            return NoteValidator.Error("Все поля должны быть заполныен")
+            return NoteValidator.Error("Все поля должны быть заполнены")
         }
         if(
             timeStart==timeFinish
         )
-            return NoteValidator.Error("")
+            return NoteValidator.Error("Время не должно совпадать")
 
         val dateTimeStartString="${date} ${timeStart}"
         val dateTimeFinishString="${date} ${timeFinish}"

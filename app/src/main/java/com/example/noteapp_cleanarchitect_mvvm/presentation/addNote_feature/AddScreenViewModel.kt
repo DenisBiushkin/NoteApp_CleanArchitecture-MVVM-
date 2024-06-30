@@ -12,6 +12,7 @@ import com.example.noteapp_cleanarchitect_mvvm.domain.model.NoteValidator
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.AddNoteUseCase
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.ValidateNewNoteUseCase
 import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util.AddNoteEvent
+import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util.AlertDialogState
 import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util.ClockSelector
 import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util.DateFiledState
 import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util.TextFieldState
@@ -49,13 +50,23 @@ class AddScreenViewModel @Inject constructor(
         DateFiledState(hint = "Время конца задачи")
     )
     val timeFinish_text:State<DateFiledState> = _timeFinish_text
+
+    private val _messageDialog =mutableStateOf(
+       AlertDialogState(
+           title="Сообщение"
+       )
+    )
+    val messageDialog:State<AlertDialogState> =_messageDialog
+
+    private val _toNavigate = mutableStateOf(false)
+    val toNavigate =_toNavigate
+
     fun onEvent(event: AddNoteEvent){
         when(event){
             is AddNoteEvent.EnteredTitle ->{
                  _titleText.value=titleText.value.copy(
                      text = event.title
                  )
-                //
             }
             is AddNoteEvent.ChangeTitleVisibility ->{
                     if(_titleText.value.text.isBlank())
@@ -73,6 +84,14 @@ class AddScreenViewModel @Inject constructor(
                     _descriptinText.value=_descriptinText.value.copy(
                         hintVisibility =!event.visibility.isFocused
                     )
+            }
+            is AddNoteEvent.ChangeDialogMessageVisibiltity->{
+                _messageDialog.value=messageDialog.value.copy(
+                    dialogVisibility = !messageDialog.value.dialogVisibility
+                )
+            }
+            is AddNoteEvent.ChangeNavigateState->{
+                _toNavigate.value=!toNavigate.value
             }
             is AddNoteEvent.ChoiseDate->{
                 SelectDateTime(
@@ -120,9 +139,14 @@ class AddScreenViewModel @Inject constructor(
                     is NoteValidator.CorrectNote->{
                         viewModelScope.launch {
                             addNoteUseCase.execute(result.note)
+                            _toNavigate.value=!toNavigate.value
                         }
                     }
                     is NoteValidator.Error->{
+                        _messageDialog.value=messageDialog.value.copy(
+                            message = result.messege,
+                            dialogVisibility = !messageDialog.value.dialogVisibility
+                        )
                         Log.d("MyTag","ERRRROROOROROR")
                     }
                 }

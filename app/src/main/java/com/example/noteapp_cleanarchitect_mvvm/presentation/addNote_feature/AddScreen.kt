@@ -42,6 +42,7 @@ import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util
 import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util.ClockSelector
 import com.example.noteapp_cleanarchitect_mvvm.presentation.ui.theme.detailUiColor
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.ChoiceTypeDatePicker
+import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.MessageAlertDialog
 import com.example.noteapp_cleanarchitect_mvvm.util.Constans
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -208,7 +209,21 @@ fun AddScreen(
               hintTextStyle = hintStyle,
               maxTextLines = 10
           )
+          val messageDialog=viewModel.messageDialog.value
+          MessageAlertDialog(
+              message = messageDialog.message ,
+              title =  messageDialog.title,
+              dialogContorller =  messageDialog.dialogVisibility,
+              acceptButton = {
+                  viewModel.onEvent(AddNoteEvent.ChangeDialogMessageVisibiltity)
+              }
+          )
           Spacer(modifier = Modifier.height(15.dp))
+
+          if(viewModel.toNavigate.value){//меняется внутри Viemodel когда будет событие SaveNote
+              viewModel.onEvent(AddNoteEvent.ChangeNavigateState)
+              navController.navigate(route = Screens.Main.route)
+          }
           Box (
               modifier = Modifier
                   .padding(bottom = 15.dp)
@@ -223,7 +238,6 @@ fun AddScreen(
                   text = { Text("Принять") },
                   onClick = {
                       viewModel.onEvent(AddNoteEvent.SaveNote)
-                      navController.navigate(route = Screens.Main.route)
                   }
               )
           }

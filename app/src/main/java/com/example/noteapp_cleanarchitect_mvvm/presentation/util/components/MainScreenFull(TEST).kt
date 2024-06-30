@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -76,7 +78,6 @@ fun MainScreenFull_TEST(){
                 }
 
             }
-
 //            if(dateDialogController){
 //                TestDatePicker(
 //                    confirmButt = {
@@ -106,6 +107,8 @@ fun MainScreenFull_TEST(){
                 )
             )
         }
+
+
         Box (
             modifier = Modifier
                 .fillMaxSize()
@@ -123,6 +126,7 @@ fun MainScreenFull_TEST(){
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun showMainScreenFull_TEST(){

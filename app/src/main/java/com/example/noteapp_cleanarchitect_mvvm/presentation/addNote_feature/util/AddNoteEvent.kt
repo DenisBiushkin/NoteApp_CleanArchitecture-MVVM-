@@ -13,5 +13,7 @@ sealed class AddNoteEvent {
     class ChoiseStartTime(val choiceTypeDatePicker: ChoiceTypeDatePicker) : AddNoteEvent()
     class ChoiseFinishTime(val choiceTypeDatePicker: ChoiceTypeDatePicker) : AddNoteEvent()
     object SaveNote: AddNoteEvent()
+    object ChangeDialogMessageVisibiltity:AddNoteEvent()
+    object ChangeNavigateState:AddNoteEvent()
 
 }
