@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -28,10 +29,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.noteapp_cleanarchitect_mvvm.R
+import com.example.noteapp_cleanarchitect_mvvm.domain.model.Note
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.NoteUI
+import com.example.noteapp_cleanarchitect_mvvm.util.Constans
+import java.time.LocalDateTime
 
 
 @Composable
@@ -64,17 +69,28 @@ fun ListItem(
             Row(
                 modifier = Modifier.fillMaxSize()
             ) {
-                PeriodTime(note = note)
-                TextItem(note = note)
+                PeriodTime(
+                    modifier = Modifier
+                        .fillMaxWidth(0.22f)
+                    ,
+                    note = note
+                )
+                TextItem(
+                    modifier = Modifier
+                        .fillMaxWidth(0.85f)
+                    ,
+                    note = note
+                )
                 Box (
                     modifier = Modifier
+                        .fillMaxWidth()
                         .fillMaxHeight()
-                        .width(50.dp)
-                        //.background(Color.Red)
                     ,contentAlignment = Alignment.Center
                 ){
                     Icon(
-                        modifier = Modifier.clickable {
+                        modifier = Modifier
+                            .size(30.dp)
+                            .clickable {
                               onClickDelit()
                         },
                         painter = painterResource(
@@ -89,12 +105,12 @@ fun ListItem(
 }
 @Composable
 fun TextItem(
+    modifier: Modifier =Modifier,
     note: NoteUI
 ){
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(top =5.dp)
-            .width(260.dp)
         // .background(Color.Cyan)//TEST
         , verticalArrangement = Arrangement.SpaceEvenly
     ) {
@@ -127,42 +143,41 @@ fun TextItem(
 }
 @Composable
 fun PeriodTime(
+    modifier: Modifier=Modifier,
     note: NoteUI
 ){
     Column (
-        modifier = Modifier
-            .fillMaxHeight()
-            .width(80.dp)
-        // .background(Color.Red)//TEST
-        ,
+        modifier = modifier
+            .fillMaxHeight(),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         val style=TextStyle(
-            fontSize = 24.sp,
+            fontSize = 22.sp,
             color=Color.Black,
-            //fontFamily = Constans.fontFamily,
-            fontWeight = FontWeight.Bold
+            fontFamily = Constans.fontFamily,
+            fontWeight = FontWeight.Medium
         )
         Text(text = note.time_start, style = style)
         Text(text = note.time_finish,style=style)
     }
 
 }
-//@Preview(showBackground = true)
-//@Composable
-//fun showListItem(){
-//    ListItem(note =Note(
-//            name = "Working",
-//    description = "Сделать задание по практике, сделать много многа ",
-//    date_start= LocalDateTime.of(2024, 6, 26,9,0),
-//    date_finish = LocalDateTime.of(2024, 6, 26,10,0)
-//    ).toNoteUI(),
-//        onClickDelit = {
-//
-//        },
-//        onClickItem = {
-//
-//        }
-//    )
-//}
+@Preview(showBackground = true)
+@Composable
+fun showListItem(){
+    ListItem(note = Note(
+            name = "Working",
+            description = "Сделать задание по практике, сделать много многа ",
+            date_start= LocalDateTime.of(2024, 6, 26,9,0),
+            date_finish = LocalDateTime.of(2024, 6, 26,10,0),
+            color = 12
+    ).toNoteUI(),
+        onClickDelit = {
+
+        },
+        onClickItem = {
+
+        }
+    )
+}

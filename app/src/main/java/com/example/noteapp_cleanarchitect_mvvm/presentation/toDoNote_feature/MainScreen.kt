@@ -33,10 +33,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.noteapp_cleanarchitect_mvvm.navigation.Screens
+import com.example.noteapp_cleanarchitect_mvvm.presentation.model.CurrentDay
 import com.example.noteapp_cleanarchitect_mvvm.presentation.toDoNote_feature.components.BoxItems
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.TestDatePicker
 import com.example.noteapp_cleanarchitect_mvvm.presentation.ui.theme.baseUiColor
 import com.example.noteapp_cleanarchitect_mvvm.presentation.toDoNote_feature.components.CustomButton
+import com.example.noteapp_cleanarchitect_mvvm.presentation.toDoNote_feature.util.NoteMainEvent
+import com.example.noteapp_cleanarchitect_mvvm.presentation.util.ChoiceTypeDatePicker
 import java.time.LocalDate
 
 
@@ -48,11 +51,6 @@ fun MainScreen(
 ){
 
     val state = viewmodel.state.collectAsState()
-
-    var dateDialogController by  remember { mutableStateOf(false) }
-    val selectedDate  by remember {
-        mutableStateOf(LocalDate.now())
-    }
     Column (
         modifier= Modifier
             .fillMaxSize()
@@ -63,71 +61,50 @@ fun MainScreen(
                 .fillMaxHeight(0.91f)
             //.background(Color.Red)
         ) {
-
-
-            Box(
-                modifier = Modifier
-                    .padding(5.dp)
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.08f)
-                    .background(
-                        color = baseUiColor,
-                        shape = RoundedCornerShape(7.dp)
-                    )
-            ){
-                Row (
-                    modifier = Modifier
-                        .padding(5.dp)
-                        .fillMaxSize()
-                    ,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ){
-                    CustomButton(
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(40.dp)
-                            .background(
-                                color = Color(0xFF800080),
-                                shape = RoundedCornerShape(12.dp)
-                            )
-                        , text = "Дата",
-                        onClick = {
-                            dateDialogController=true
-                        }
+            TopPart(
+                onClickDate = {
+                    viewmodel.onEvent(
+                        NoteMainEvent.ChangeDatePickerState(
+                            ChoiceTypeDatePicker.SelectedPicker
+                        )
                     )
                 }
-
-            }
-
-            if(dateDialogController){
+            )
+            if(state.value.dateWindowVisibility){
                 TestDatePicker(
                     confirmButt = {
-                        viewmodel.onDateSelected(it)
-                        dateDialogController=false
+                        viewmodel.onEvent(
+                            NoteMainEvent.ChangeDatePickerState(
+                                ChoiceTypeDatePicker.AcceptedDate(it.atTime(0,0))
+                            )
+                        )
                     },
                     dismissButt = {
-                        dateDialogController=false
+                        viewmodel.onEvent(
+                            NoteMainEvent.ChangeDatePickerState(
+                                ChoiceTypeDatePicker.RefusedDate
+                            )
+                        )
                     }
                 )
             }
             BoxItems(
-                listNotes = viewmodel.state.value.notes,
+                listNotes = state.value.notes,
                 onClickDetailItem = {
                     navController.navigate(route = Screens.Detail.toJsonFromNote(it))
                 },
                 onClickDeleteItem= {
+                    viewmodel.onEvent(
+                        NoteMainEvent.DeleteNote(it)
+                    )
                 },
-                currentDate =state.value.currentDay_format,
-
+                currentDate = state.value.currentDay_format
             )
         }
-        //часть с добавлением (кнопка добавить)
         Box (
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = 5.dp)
-            ,
+                .padding(bottom = 5.dp),
             contentAlignment = Alignment.Center
         ){
             ExtendedFloatingActionButton(
@@ -140,6 +117,46 @@ fun MainScreen(
         }
     }
 
+}
+@Composable
+fun TopPart(
+    onClickDate:()->Unit,
+    colorBackground:Color= baseUiColor,
+){
+    Box(
+        modifier = Modifier
+            .padding(5.dp)
+            .fillMaxWidth()
+            .fillMaxHeight(0.08f)
+            .background(
+                color = colorBackground,
+                shape = RoundedCornerShape(7.dp)
+            )
+    ){
+        Row (
+            modifier = Modifier
+                .padding(5.dp)
+                .fillMaxSize()
+            ,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            CustomButton(
+                modifier = Modifier
+                    .width(100.dp)
+                    .height(40.dp)
+                    .background(
+                        color = Color(0xFF800080),
+                        shape = RoundedCornerShape(12.dp)
+                    )
+                , text = "Дата",
+                onClick = {
+                    onClickDate()
+                }
+            )
+        }
+
+    }
 }
 
 @Preview(showBackground = true)

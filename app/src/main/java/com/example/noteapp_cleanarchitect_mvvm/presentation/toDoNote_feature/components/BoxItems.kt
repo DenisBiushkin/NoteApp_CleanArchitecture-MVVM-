@@ -21,12 +21,18 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.noteapp_cleanarchitect_mvvm.domain.model.Note
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.CurrentDay
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.NoteUI
 import com.example.noteapp_cleanarchitect_mvvm.presentation.ui.theme.baseUiColor
+import com.example.noteapp_cleanarchitect_mvvm.util.Constans
+import java.time.LocalDateTime
 
 @Composable
 fun BoxItems(
@@ -42,7 +48,6 @@ fun BoxItems(
     Box(modifier = Modifier
         .padding(5.dp)
         .fillMaxWidth()
-        // .fillMaxHeight(0.85f)
         .background(
             shape = shapebox,
             brush = Brush.verticalGradient(
@@ -69,7 +74,9 @@ fun BoxItems(
                     text= buildAnnotatedString {
                         withStyle(
                             style = SpanStyle(
-                                fontSize = 20.sp
+                                fontSize = 20.sp,
+                                fontFamily = Constans.fontFamily,
+                                fontWeight = FontWeight.Normal
                             )
                         ){
                             append("${currentDate.date_format} г")
@@ -80,7 +87,9 @@ fun BoxItems(
                     text= buildAnnotatedString {
                         withStyle(
                             style = SpanStyle(
-                                fontSize = 20.sp
+                                fontSize = 20.sp,
+                                fontFamily = Constans.fontFamily,
+                                fontWeight = FontWeight.Normal
                             )
                         ){
                             append(currentDate.dayweek)
@@ -108,31 +117,32 @@ fun BoxItems(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun showBoxItems(){
-//
-//    val note =Note(
-//        name = "Working",
-//        description = "Сделать задание по практике, сделать много многа ",
-//        date_start= LocalDateTime.of(2024, 6, 26,9,0),
-//        date_finish = LocalDateTime.of(2024, 6, 26,10,0)
-//    ).toNoteUI()
-//    BoxItems(
-//
-//        listNotes = listOf(
-//            note,note,
-//            note,note,
-//            note,note,
-//            note,note,
-//
-//        ),
-//        onClickDeleteItem = {
-//
-//        },
-//        onClickDetailItem = {
-//
-//        },
-//        currentDate =CurrentDay(date_format = "27.0.2024")
-//    )
-//}
+@Preview(showBackground = true)
+@Composable
+fun showBoxItems(){
+
+    val note = Note(
+        name = "Working",
+        description = "Сделать задание по практике, сделать много многа ",
+        date_start= LocalDateTime.of(2024, 6, 26,9,0),
+        date_finish = LocalDateTime.of(2024, 6, 26,10,0),
+        color = 12
+    ).toNoteUI()
+    BoxItems(
+
+        listNotes = listOf(
+            note,note,
+            note,note,
+            note,note,
+            note,note,
+
+        ),
+        onClickDeleteItem = {
+
+        },
+        onClickDetailItem = {
+
+        },
+        currentDate =CurrentDay(date_format = "27.0.2024")
+    )
+}
