@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.AddNoteUseCase
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.GetNotesByDateUseCase
 import com.example.noteapp_cleanarchitect_mvvm.presentation.model.CurrentDay
-import com.example.noteapp_cleanarchitect_mvvm.presentation.util.ChoiceType
+import com.example.noteapp_cleanarchitect_mvvm.presentation.util.ChoiceTypeDatePicker
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.NoteMainEvent
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.NoteState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -48,16 +48,15 @@ class ToDoListViewModel @Inject constructor(
                //удалить строку дела
             }
             is NoteMainEvent.ChoiseDate->{
-                when(event.choiceType){
-                    ChoiceType.Accepted ->{
-                        //закрыть окно даты
-                        //Сделать запрос по дате
-                    }
-                    ChoiceType.Freedom->{
+                when(event.choiceTypeDatePicker){
+                    is ChoiceTypeDatePicker.SelectedPicker->{
                         //открыть окно даты
                     }
-                    ChoiceType.Refused->{
+                    is ChoiceTypeDatePicker.RefusedDate->{
                         //закрыть окно даты
+                    }
+                    is ChoiceTypeDatePicker.AcceptedDate ->{
+
                     }
                 }
             }

@@ -25,7 +25,7 @@ fun TextFieldWithIcon(
     hintTextStyle: TextStyle,
     hintVisibility:Boolean=true,
     focused:(FocusState)->Unit,
-    colorField: Color
+    colorField: Color=Color.Transparent
 ){
     Row(
         modifier = Modifier

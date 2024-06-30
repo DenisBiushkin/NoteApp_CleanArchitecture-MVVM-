@@ -8,7 +8,7 @@ sealed class NoteMainEvent {
     class  DeleteNote(val note: Note):NoteMainEvent()
 
     //class DetatilNote(val note: Note):NoteMainEvent()
-    class ChoiseDate(val choiceType: ChoiceType) : NoteMainEvent()
+    data class ChoiseDate(val choiceTypeDatePicker: ChoiceTypeDatePicker) : NoteMainEvent()
 
 
 }

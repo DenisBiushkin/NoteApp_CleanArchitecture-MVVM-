@@ -22,7 +22,7 @@ import java.time.LocalDateTime
 @Composable
 fun DateFieldWithIcon(
     icon: Painter,
-    tintColor: Color,
+    iconColor: Color,
     date_text:String,
     date_textStyle: TextStyle,
     ondateConfirm:(LocalDateTime)->Unit,
@@ -40,7 +40,7 @@ fun DateFieldWithIcon(
         Icon(
             painter = icon,
             contentDescription ="",
-            tint = tintColor
+            tint = iconColor
         )
 
         Spacer(modifier = Modifier.width(10.dp))
