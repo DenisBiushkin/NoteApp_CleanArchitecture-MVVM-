@@ -25,7 +25,8 @@ fun TextFieldWithIcon(
     hintTextStyle: TextStyle,
     hintVisibility:Boolean=true,
     focused:(FocusState)->Unit,
-    colorField: Color=Color.Transparent
+    colorField: Color=Color.Transparent,
+    maxTextLines:Int=1
 ){
     Row(
         modifier = Modifier
@@ -48,7 +49,8 @@ fun TextFieldWithIcon(
             hintVisibility = hintVisibility,
             focused = {
                 focused(it)
-            }
+            },
+            maxTextLines = maxTextLines
         )
 
     }

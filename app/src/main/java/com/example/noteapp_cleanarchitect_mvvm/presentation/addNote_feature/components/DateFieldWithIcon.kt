@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.ClockSelector
+import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util.ClockSelector
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.ExprimentalTimeDialogPicker
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.components.TestDatePicker
 import java.time.LocalDate

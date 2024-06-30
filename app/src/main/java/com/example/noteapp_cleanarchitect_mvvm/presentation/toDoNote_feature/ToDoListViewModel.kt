@@ -33,12 +33,10 @@ class ToDoListViewModel @Inject constructor(
     )
     val state= _state.asStateFlow()
     init {
-        val date_search = LocalDateTime
-            .of(2024, 6, 26,0,0)
+        val date_search = LocalDate.now().atTime(0,0)
         GetNotesByDate(date_search)
         onCerrentDateChanged(date_search.toLocalDate())
     }
-
     fun onEvent(event: NoteMainEvent){
         when(event){
             is NoteMainEvent.AddNewNote ->{

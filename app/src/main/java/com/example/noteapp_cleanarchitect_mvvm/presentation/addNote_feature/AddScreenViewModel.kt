@@ -1,5 +1,6 @@
 package com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -7,17 +8,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.noteapp_cleanarchitect_mvvm.domain.model.Note
+import com.example.noteapp_cleanarchitect_mvvm.domain.model.NoteValidator
 import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.AddNoteUseCase
+import com.example.noteapp_cleanarchitect_mvvm.domain.use_case.ValidateNewNoteUseCase
+import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util.AddNoteEvent
+import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util.ClockSelector
+import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util.DateFiledState
+import com.example.noteapp_cleanarchitect_mvvm.presentation.addNote_feature.util.TextFieldState
 import com.example.noteapp_cleanarchitect_mvvm.presentation.util.ChoiceTypeDatePicker
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
 class AddScreenViewModel @Inject constructor(
-    private val addNoteUseCase: AddNoteUseCase
+    private val addNoteUseCase: AddNoteUseCase,
+    private val validateNewNoteUseCase: ValidateNewNoteUseCase
 ):ViewModel() {
     private val _titleText = mutableStateOf(
         TextFieldState(hint = "Заголовок")
@@ -43,7 +49,7 @@ class AddScreenViewModel @Inject constructor(
         DateFiledState(hint = "Время конца задачи")
     )
     val timeFinish_text:State<DateFiledState> = _timeFinish_text
-    fun onEvent(event:AddNoteEvent){
+    fun onEvent(event: AddNoteEvent){
         when(event){
             is AddNoteEvent.EnteredTitle ->{
                  _titleText.value=titleText.value.copy(
@@ -99,14 +105,27 @@ class AddScreenViewModel @Inject constructor(
             }
             is AddNoteEvent.SaveNote->{
                 val intColor=Color.Cyan.toArgb()
-                val newNote =Note(
-                    name = _titleText.value.text,
-                    description = _descriptinText.value.text,
-                    date_start = LocalDateTime.now(),//изменить на поле в Viemodel
-                    date_finish = LocalDateTime.now(),//изменить на поле в Viemodel
+                val date =date_text.value.date_text
+                val start=timeStart_text.value.date_text
+                val finish=timeFinish_text.value.date_text
+                val result=validateNewNoteUseCase.execute(
+                    date=date,
+                    timeStart = start,
+                    timeFinish = finish,
+                    title = titleText.value.text,
+                    description = descriptinText.value.text,
                     color=intColor
                 )
-                addNote(newNote)
+                when(result){
+                    is NoteValidator.CorrectNote->{
+                        viewModelScope.launch {
+                            addNoteUseCase.execute(result.note)
+                        }
+                    }
+                    is NoteValidator.Error->{
+                        Log.d("MyTag","ERRRROROOROROR")
+                    }
+                }
             }
 
         }
@@ -145,9 +164,5 @@ class AddScreenViewModel @Inject constructor(
             }
         }
     }
-    private fun addNote(note: Note){
-        viewModelScope.launch {
-            addNoteUseCase.execute(note=note)
-        }
-    }
+
 }

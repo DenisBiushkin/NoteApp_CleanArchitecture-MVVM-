@@ -15,7 +15,7 @@ import androidx.compose.ui.text.TextStyle
 
 @Composable
 fun TransparentTextField(
-    modifier: Modifier = Modifier,
+    modifierField: Modifier = Modifier,
     text:String,
     onTextChange:(String)->Unit,
     hint:String,
@@ -23,18 +23,21 @@ fun TransparentTextField(
     textStyle: TextStyle,
     hintVisibility: Boolean =true,
     focused : (FocusState)->Unit,
-    color : Color
+    color : Color,
+    maxTextLines:Int=1
 ){
     Box(
-        modifier =modifier
+
     ){
 
        BasicTextField(
+
            value =text,
+           maxLines= maxTextLines,
            onValueChange ={
               onTextChange(it)
            } ,
-           modifier = modifier
+           modifier = modifierField
                .background(
                color=color)
                .onFocusChanged {
