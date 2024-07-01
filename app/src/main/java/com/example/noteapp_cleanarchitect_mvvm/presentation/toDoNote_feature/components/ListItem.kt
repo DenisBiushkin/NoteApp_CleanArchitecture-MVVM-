@@ -77,26 +77,29 @@ fun ListItem(
                 )
                 TextItem(
                     modifier = Modifier
-                        .fillMaxWidth(0.85f)
+                        .fillMaxWidth(0.90f)
+                    //0.85f для икноки удаления
                     ,
                     note = note
                 )
-                Box (
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight()
-                    ,contentAlignment = Alignment.Center
-                ){
-                    Icon(
-                        modifier = Modifier
-                            .size(30.dp)
-                            .clickable {
-                              onClickDelit()
-                        },
-                        painter = painterResource(
-                            id = R.drawable.baseline_delete),
-                        contentDescription = "")
-                }
+
+
+//                Box (
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .fillMaxHeight()
+//                    ,contentAlignment = Alignment.Center
+//                ){
+//                    Icon(
+//                        modifier = Modifier
+//                            .size(30.dp)
+//                            .clickable {
+//                              onClickDelit()
+//                        },
+//                        painter = painterResource(
+//                            id = R.drawable.baseline_delete),
+//                        contentDescription = "")
+//                }
 
 
             }
