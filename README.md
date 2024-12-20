@@ -1,6 +1,6 @@
 I'm sorry, I accidentally added MVVM to the repository name, although it's actually MVI :) (XD I'll rename the repository name later)
-![Main Screen](app/src/main/res/drawable/main_screen_withItems.jpg)
-![Detail Note](app/src/main/res/drawable/detailNoteScreen.jpg)
+![Main Screen](app/src/main/res/drawable/main_screen_withitems.jpg)
+![Detail Note](app/src/main/res/drawable/detail_note_screen.jpg)
 ![Add New Note](app/src/main/res/drawable/new_note.jpg)
 ![Date Picker](app/src/main/res/drawable/date_picker_screen.jpg)
 ![Time Picker](app/src/main/res/drawable/time_picker_screen.jpg)
