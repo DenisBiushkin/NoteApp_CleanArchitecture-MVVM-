@@ -1,5 +1,5 @@
 I'm sorry, I accidentally added MVVM to the repository name, although it's actually MVI :) (XD I'll rename the repository name later)
-![alt text](main_screen_withItems-1.jpg)
+![alt text](app/src/main/res/drawable/main_screen_withItems-1.jpg)
 ![alt text](detailNoteScreen.jpg)
 ![alt text](new_note.jpg)
 ![alt text](date_picker_screen.jpg)
